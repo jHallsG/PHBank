@@ -49,12 +49,13 @@ body {
  {
     width: 100%;
     padding: 10px;
-    margin-bottom: 20px;
+	margin-bottom: 5px;
     border: none;
     border-radius: 5px;
     background-color: #0F245A;
     color: white;
     font-size: 1em;
+    box-sizing: border-box;
 }
 
 .loginContainer input[type="submit"] {
@@ -92,8 +93,29 @@ body {
     margin-bottom: 20px;
 }
 
+.form-error {
+    color: red;
+    font-size: 0.75em;
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+	display: block;
+}
+
 a{
     color: blueviolet;
+}
+
+.error-message{
+	display: block;
+	margin: auto;
+	color: red;
+    background-color: #fdd;
+    border: 1px solid red;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
 }
 
 @media (max-width: 768px) {
