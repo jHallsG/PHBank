@@ -27,13 +27,13 @@
 	<div class="loginContainer">
 		<form:form action="processSignUp" modelAttribute="s_creds">
 			<label for="acctNum"> Account </label>
-			<form:input name= "acctNum" type="number" placeholder="Account Number" path="acctNum" />
+			<form:input name= "acctNum" type="number" placeholder="Account Number" path="acctNum" required="true"/>
 			<form:errors path="acctNum" cssClass="form-error"></form:errors>
 			<label for="pass"> Password </label>
-			<form:input name="pass" type="password" placeholder="Password" path="password" />
+			<form:input name="pass" type="password" placeholder="Password" path="password" required="true"/>
 			<form:errors path="password" cssClass="form-error"></form:errors>
 			<label for="confirmPass"> Confirm Password </label>
-			<form:input name = "confirmPass" type="password" placeholder="Confirm Password" path="confirmPassword" />
+			<form:input name = "confirmPass" type="password" placeholder="Confirm Password" path="confirmPassword" required="true"/>
 			<form:errors path="confirmPassword" cssClass="form-error"></form:errors>
 			<input type="submit" value="Sign Up">
 			<label> Already have an account? Login <a href="../login/">here</a>

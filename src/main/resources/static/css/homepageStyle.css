@@ -12,11 +12,33 @@ body {
     align-items: center;
     padding: 20px 100px;
     background-color: #1B2D58;
+    color: white;
 }
 
-.headerContainer img {
+.logoAndWelcome {
+    display: flex;
+    align-items: center;
+}
+
+.phBankImg {
     width: 150px;
     height: auto;
+}
+
+.welcomeMessage {
+    margin-left: 15px;
+}
+
+.welcomeMessage h3 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.welcomeMessage h4 {
+    margin: 0;
+    font-size: 1.2em;
+    font-weight: normal;
+    color: #F5C518; /* Lightened color for "USER" */
 }
 
 .navLinks {

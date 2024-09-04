@@ -28,14 +28,14 @@
 	<div class="loginContainer">
 		<form:form action="processLogin" modelAttribute="creds">
 			<c:if test="${param.error != null}">
-				<i class="error-message"">Invalid login credentials</i>
+				<i class="error-message">Bad Credentials</i>
 			</c:if>
 			
 			<label for="acct"> Account </label>
 			<form:input type="number" name = "acct" placeholder="Account Number" path="acctNum" required="true"></form:input>
 			<form:errors path = "acctNum" cssClass="form-error"></form:errors>
 			<label for="pass"> Password </label>
-			<form:input type="text" name = "pass" placeholder="Password" path="password" required="true"></form:input>
+			<form:input type="password" name = "pass" placeholder="Password" path="password" required="true"></form:input>
 			<form:errors path = "password" cssClass="form-error"></form:errors>
 			<input type="submit" value="Login">
 			<label> No account? Sign Up <a href="../signup/">here</a></label>

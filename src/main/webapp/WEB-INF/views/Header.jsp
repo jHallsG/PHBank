@@ -7,7 +7,13 @@
 </head>
 <body>
     <header class="headerContainer">
-        <img class="phBankImg" src="${pageContext.request.contextPath}/images/PHBank.jpg" alt="PHBank Logo">
+        <div class="logoAndWelcome">
+            <img class="phBankImg" src="${pageContext.request.contextPath}/images/PHBank.jpg" alt="PHBank Logo">
+            <div class="welcomeMessage">
+                <h3>Welcome to PHBank,</h3>
+                <h4>USER</h4>
+            </div>
+        </div>
         <nav>
             <ul class="navLinks">
                 <li><a href="./">Home</a></li>
