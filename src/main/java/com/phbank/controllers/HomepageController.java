@@ -27,10 +27,4 @@ public class HomepageController {
 	public String contactUs() {
 		return "ContactUs";
 	}
-	
-	@GetMapping("/logout")
-	public String logout() {
-		return "Logout";
-	}
-
 }

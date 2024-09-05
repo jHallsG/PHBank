@@ -32,6 +32,13 @@ public class SecurityConfig {
 //						.failureUrl("/login/")
 						.usernameParameter("acctNum")
 						.passwordParameter("password")
+						.permitAll())
+		
+				.logout(logout -> logout
+						.logoutUrl("/logout/")
+						.logoutSuccessUrl("/login/?logout")
+						.invalidateHttpSession(true)
+						.deleteCookies("JSESSIONID")
 						.permitAll());
 
 		return http.build();

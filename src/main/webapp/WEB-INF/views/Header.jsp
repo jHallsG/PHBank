@@ -20,7 +20,7 @@
                 <li><a href="./aboutus">About Us</a></li>
                 <li><a href="./services">Services</a></li>
                 <li><a href="./contactus">Contact</a></li>
-                <li><a href="./logout">Logout</a></li>
+                <li><a href="${pageContext.request.contextPath}/logout/">Logout</a></li>
             </ul>
         </nav>
     </header>
