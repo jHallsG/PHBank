@@ -8,6 +8,7 @@ public class HeaderFooterController {
 	
 	@GetMapping("/header")
     public String getHeader() {
+		
         return "Header";
     }
 

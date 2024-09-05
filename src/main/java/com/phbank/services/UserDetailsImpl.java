@@ -1,7 +1,5 @@
 package com.phbank.services;
 
-import java.util.List;
-
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -14,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.phbank.dao.CredentialsDAO;
-import com.phbank.dao.CustomerDAO;
 
 @Transactional
 @Service
@@ -32,7 +29,7 @@ public class UserDetailsImpl implements UserDetailsService, UserDetailsManager{
 	private String createUserDetails = "INSERT INTO customer (account_number) VALUES (?)";
 	private String createRegistrationrecord = "INSERT INTO transaction (account_number, transaction_type) VALUES (?,?)";
 	private String queryCreds = "SELECT password, account_number as acctNum, authority as role FROM credentials WHERE account_number = ?";
-	private String queryCustomerDetails = "SELECT name, address, contact_number as contact FROM customer WHERE account_number = ?";
+//	private String queryCustomerDetails = "SELECT name, address, contact_number as contact FROM customer WHERE account_number = ?";
 	
 
 	@Override
@@ -87,14 +84,13 @@ public class UserDetailsImpl implements UserDetailsService, UserDetailsManager{
 		// This is to prevent hackers from guessing valid user account names
 		if (!userExists(username)) throw new UsernameNotFoundException("");
 		
-		List<CredentialsDAO> getUser = jdbcTemplate.query(queryCreds, new BeanPropertyRowMapper<>(CredentialsDAO.class), username);
-		List<CustomerDAO> getUserDetails = jdbcTemplate.query(queryCustomerDetails, new BeanPropertyRowMapper<>(CustomerDAO.class), username);
+		CredentialsDAO getUser = jdbcTemplate.queryForObject(queryCreds, new BeanPropertyRowMapper<>(CredentialsDAO.class), username);
 		
 		UserDetails existingUser = User
-				.withUsername(getUser.get(0).getAcctNum())
-				.password(getUser.get(0).getPassword())
+				.withUsername(getUser.getAcctNum())
+				.password(getUser.getPassword())
 				//.roles(getUser.get(0).getRole()) //--> prepends "ROLE_" to each role passed to it
-				.authorities(getUser.get(0).getRole()) // --> accepts each role without prepending anything
+				.authorities(getUser.getRole()) // --> accepts each role without prepending anything
 				.build();
 		
 		return existingUser;

@@ -11,7 +11,7 @@
             <img class="phBankImg" src="${pageContext.request.contextPath}/images/PHBank.jpg" alt="PHBank Logo">
             <div class="welcomeMessage">
                 <h3>Welcome to PHBank,</h3>
-                <h4>USER</h4>
+                <h4>${custName}</h4>
             </div>
         </div>
         <nav>

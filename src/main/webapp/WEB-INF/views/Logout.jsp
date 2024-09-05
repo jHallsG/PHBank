@@ -13,7 +13,7 @@
     <div class="confirmLogoutContainer">
         <h1>Confirm Logout?</h1>
         <div class="buttonContainer">
-            <a href="./home/" class="cancelButton">Cancel</a>
+            <a href="../home/" class="cancelButton">Cancel</a>
             <form action = "../logout/" method="POST">
             	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
             	<button type="submit" class="logoutButton">Logout</button>

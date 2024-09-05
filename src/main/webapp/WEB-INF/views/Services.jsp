@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,7 +40,7 @@
     <div id="editAccountPopup" class="popupContainer">
         <div class="popupContent">
             <h2>Edit Account Info</h2>
-            <form>
+            <form:form>
                 <label for="editName">Name</label>
                 <input type="text" id="editName" name="editName" placeholder="Name" required>
 
@@ -47,7 +51,7 @@
                 <input type="number" id="editContact" name="editContact" placeholder="Contact Number" required>
 
                 <input type="submit" value="Save Changes">
-            </form>
+            </form:form>
             <button onclick="closePopup('editAccountPopup')">Close</button>
         </div>
     </div>
