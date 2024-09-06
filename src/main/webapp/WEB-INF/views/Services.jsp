@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,6 +20,10 @@
     <main class="servicesContainer">
         <h1>Our Services</h1>
         <div class="serviceItems">
+        	 <div class="serviceItem" onclick="showPopup('viewBalancePopup')">
+                <h2>View Balance</h2>
+            </div>
+        
             <div class="serviceItem" onclick="showPopup('editAccountPopup')">
                 <h2>Edit Account Info</h2>
             </div>
@@ -35,20 +40,29 @@
     </main>
 
     <div id="footer-placeholder"></div>
-
+    
+    <!-- Pop-up for View Balance Info -->
+    <div id="viewBalancePopup" class="popupContainer">
+        <div class="popupContent">
+            <h2>Current Balance</h2>
+            <label>${balance}</label>
+            <button onclick="closePopup('viewBalancePopup')">Close</button>
+        </div>
+    </div>
+    
     <!-- Pop-up for Edit Account Info -->
     <div id="editAccountPopup" class="popupContainer">
         <div class="popupContent">
             <h2>Edit Account Info</h2>
-            <form:form>
+            <form:form modelAttribute = "editInfo" action="processAccountInfo" method="POST">
                 <label for="editName">Name</label>
-                <input type="text" id="editName" name="editName" placeholder="Name" required>
+                <form:input type="text" path="name" id="editName" name="editName" placeholder="Name" required="true"/>
 
                 <label for="editAddress">Address</label>
-                <input type="text" id="editAddress" name="editAddress" placeholder="Address" required>
+                <form:input type="text" path="address" id="editAddress" name="editAddress" placeholder="Address" required="true"/>
 
 				<label for="editContact">Contact Number</label>
-                <input type="number" id="editContact" name="editContact" placeholder="Contact Number" required>
+                <form:input type="number" path="contact" id="editContact" name="editContact" placeholder="Contact Number" required="true"/>
 
                 <input type="submit" value="Save Changes">
             </form:form>
@@ -60,15 +74,15 @@
     <div id="depositPopup" class="popupContainer">
         <div class="popupContent">
             <h2>Deposit</h2>
-            <form>
+            <form:form modelAttribute="deposit" action="processDeposit" method="POST">
                 <label for="depositAccountNumber">Account Number</label>
-                <input type="text" id="depositAccountNumber" name="depositAccountNumber" placeholder="Account Number" required>
+                <form:input path = "acctNum" id="depositAccountNumber" name="depositAccountNumber" placeholder="Account Number" readOnly="true"/>
 
                 <label for="depositAmount">Deposit Amount</label>
-                <input type="number" id="depositAmount" name="depositAmount" placeholder="Deposit Amount" required>
+                <form:input type="number" path = "amount" id="depositAmount" name="depositAmount" placeholder="Deposit Amount" required="true"/>
 
                 <input type="submit" value="Deposit">
-            </form>
+            </form:form>
             <button onclick="closePopup('depositPopup')">Close</button>
         </div>
     </div>
@@ -97,15 +111,26 @@
     <div id="transactionHistoryPopup" class="popupContainer">
         <div class="popupContent">
             <h2>Transaction History</h2>
-            <form>
-                <label for="historyAccountNumber">Account Number</label>
-                <input type="text" id="historyAccountNumber" name="historyAccountNumber" placeholder="Account Number" required>
+            <hr>
+            <table class="table table-hover">
+			<tr>
+				<th>Transaction Type</th>
+				<th>Amount</th>
+				<th>Transaction Date</th>
+			</tr>
 
-                <label for="historyDateRange">Date Range</label>
-                <input type="text" id="historyDateRange" name="historyDateRange" placeholder="Date Range" required>
+			<c:forEach var="transaction" items="${transaction}">
+				<tr>
+					<td>${transaction.type}</td>
+					<td>${transaction.amount}</td>
+					<td>${transaction.transactionDate}</td>
+				</tr>
+			</c:forEach>
 
-                <input type="submit" value="View History">
-            </form>
+		</table>
+            
+            
+            
             <button onclick="closePopup('transactionHistoryPopup')">Close</button>
         </div>
     </div>

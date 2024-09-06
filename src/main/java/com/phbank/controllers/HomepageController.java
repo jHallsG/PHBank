@@ -18,11 +18,6 @@ public class HomepageController {
 		return "AboutUs";
 	}
 	
-	@GetMapping("/services")
-	public String services() {
-		return "Services";
-	}
-	
 	@GetMapping("/contactus")
 	public String contactUs() {
 		return "ContactUs";

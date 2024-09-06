@@ -1,8 +1,8 @@
-package com.phbank.dao;
+package com.phbank.model;
 
 import java.math.BigDecimal;
 
-public class AccountDAO {
+public class AccountModel {
 	
 	private String acctNum;
 	private BigDecimal balance;
@@ -19,7 +19,4 @@ public class AccountDAO {
 	public void setBalance(BigDecimal balance) {
 		this.balance = balance;
 	}
-	
-	
-
 }

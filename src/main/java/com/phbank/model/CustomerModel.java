@@ -1,6 +1,6 @@
-package com.phbank.dao;
+package com.phbank.model;
 
-public class CustomerDAO {
+public class CustomerModel {
 	
 	private String name;
 	private String address;

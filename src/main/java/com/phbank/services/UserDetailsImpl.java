@@ -3,7 +3,6 @@ package com.phbank.services;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -11,7 +10,8 @@ import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.phbank.dao.CredentialsDAO;
+import com.phbank.model.CredentialsModel;
+import com.phbank.model.CustomerModel;
 
 @Transactional
 @Service
@@ -23,19 +23,21 @@ public class UserDetailsImpl implements UserDetailsService, UserDetailsManager{
 		this.jdbcTemplate = jdbcTemplate;
 	}
 	
-	private String checkUserExist = "SELECT count(*) FROM account WHERE account_number = ?";
-	private String createUserAcct = "INSERT INTO account (account_number) VALUES (?)";
-	private String createUserCred = "INSERT INTO credentials (password, account_number, authority) VALUES (?,?,?)";
-	private String createUserDetails = "INSERT INTO customer (account_number) VALUES (?)";
-	private String createRegistrationrecord = "INSERT INTO transaction (account_number, transaction_type) VALUES (?,?)";
-	private String queryCreds = "SELECT password, account_number as acctNum, authority as role FROM credentials WHERE account_number = ?";
-//	private String queryCustomerDetails = "SELECT name, address, contact_number as contact FROM customer WHERE account_number = ?";
+	private final String checkUserExist = "SELECT count(*) FROM account WHERE account_number = ?";
+	private final String createUserAcct = "INSERT INTO account (account_number) VALUES (?)";
+	private final String createUserCred = "INSERT INTO credentials (password, account_number, authority) VALUES (?,?,?)";
+	private final String createUserDetails = "INSERT INTO customer (account_number) VALUES (?)";
+	private final String createRegistrationrecord = "INSERT INTO transaction (account_number, transaction_type) VALUES (?,?)";
+	private final String queryCreds = "SELECT password, account_number as acctNum, authority as role FROM credentials WHERE account_number = ?";
+	private final String queryCustomerDetails = "SELECT name, address, contact_number as contact FROM customer WHERE account_number = ?";
 	
-
 	@Override
 	public void createUser(UserDetails user) {
 		
-		if (userExists(user.getUsername())) throw new DataIntegrityViolationException("Error.duplicate.account");
+		if (userExists(user.getUsername())) {
+			System.out.println("Duplicate Data Error");
+			throw new DataIntegrityViolationException("Error.duplicate.account");
+		}
 		
 		String auth = user
 				.getAuthorities()
@@ -84,16 +86,19 @@ public class UserDetailsImpl implements UserDetailsService, UserDetailsManager{
 		// This is to prevent hackers from guessing valid user account names
 		if (!userExists(username)) throw new UsernameNotFoundException("");
 		
-		CredentialsDAO getUser = jdbcTemplate.queryForObject(queryCreds, new BeanPropertyRowMapper<>(CredentialsDAO.class), username);
+		CredentialsModel getUser = jdbcTemplate.queryForObject(queryCreds, new BeanPropertyRowMapper<>(CredentialsModel.class), username);
+		CustomerModel custDao = jdbcTemplate.queryForObject(queryCustomerDetails, new BeanPropertyRowMapper<>(CustomerModel.class), username);
 		
-		UserDetails existingUser = User
-				.withUsername(getUser.getAcctNum())
-				.password(getUser.getPassword())
-				//.roles(getUser.get(0).getRole()) //--> prepends "ROLE_" to each role passed to it
-				.authorities(getUser.getRole()) // --> accepts each role without prepending anything
-				.build();
+		getUser.setCustDao(custDao);
 		
-		return existingUser;
+//		UserDetails existingUser = User
+//				.withUsername(getUser.getAcctNum())
+//				.password(getUser.getPassword())
+//				//.roles(getUser.get(0).getRole()) //--> prepends "ROLE_" to each role passed to it
+//				.authorities(getUser.getRole()) // --> accepts each role without prepending anything
+//				.build();
+		
+		return getUser;
 	}
 
 }

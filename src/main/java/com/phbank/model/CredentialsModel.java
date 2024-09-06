@@ -1,4 +1,4 @@
-package com.phbank.dao;
+package com.phbank.model;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -7,12 +7,12 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-public class CredentialsDAO implements UserDetails{
+public class CredentialsModel implements UserDetails{
 	
 	private String password;
 	private String acctNum;
 	private String role;
-	private CustomerDAO custDao;
+	private CustomerModel custDao;
 	
 	public String getPassword() {
 		return password;
@@ -32,10 +32,10 @@ public class CredentialsDAO implements UserDetails{
 	public void setRole(String role) {
 		this.role = role;
 	}
-	public CustomerDAO getCustDao() {
+	public CustomerModel getCustDao() {
 		return custDao;
 	}
-	public void setCustDao(CustomerDAO custDao) {
+	public void setCustDao(CustomerModel custDao) {
 		this.custDao = custDao;
 	}
 	@Override

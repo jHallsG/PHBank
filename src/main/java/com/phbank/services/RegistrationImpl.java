@@ -3,18 +3,17 @@ package com.phbank.services;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
 
 @Service
 public class RegistrationImpl {
 	
 	private final PasswordEncoder passwordEncoder;
-	private final UserDetailsManager userDetailsManager;
+	private final UserDetailsImpl userDetailsImpl;
 	
-	public RegistrationImpl(PasswordEncoder passwordEncoder, UserDetailsManager userDetailsManager) {
+	public RegistrationImpl(PasswordEncoder passwordEncoder, UserDetailsImpl userDetailsImpl) {
 		this.passwordEncoder = passwordEncoder;
-		this.userDetailsManager = userDetailsManager;
+		this.userDetailsImpl = userDetailsImpl;
 	}
 	
 	public void registerUser(String username, String password) {
@@ -25,6 +24,6 @@ public class RegistrationImpl {
 				.roles("USER")
 				.build();
 		
-		userDetailsManager.createUser(newUser);
+		userDetailsImpl.createUser(newUser);
 	}
 }
