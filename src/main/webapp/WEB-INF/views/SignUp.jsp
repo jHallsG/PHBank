@@ -11,6 +11,7 @@
 <title>SignUp</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/phBank-artstyle.css">
+<link rel = "icon" type ="image/png" href = "${pageContext.request.contextPath}/images/PHBank_favicon.png">
 </head>
 
 <body>

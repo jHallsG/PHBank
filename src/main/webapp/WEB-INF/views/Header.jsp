@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel = "icon" type ="image/png" href = "${pageContext.request.contextPath}/images/PHBank_favicon.png">
 </head>
 <body>
     <header class="headerContainer">
         <div class="logoAndWelcome">
-            <img class="phBankImg" src="${pageContext.request.contextPath}/images/PHBank.jpg" alt="PHBank Logo">
+            <img class="phBankImg" src="${pageContext.request.contextPath}/images/PHBank_Header.jpg" alt="PHBank Logo">
             <div class="welcomeMessage">
                 <h3>Welcome to PHBank,</h3>
                 <h4>${custName.name}(${acctNum})</h4>

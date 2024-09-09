@@ -1,15 +1,17 @@
 package com.phbank.dao;
 
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.phbank.model.TransactionsModel;
 
 public interface ServicesDAO {
 	
-	public BigInteger viewBalance(String acctNum);
+	public BigDecimal viewBalance(String acctNum);
 	public void editAccount(String acctNum, String name, String address, String contact);
-	public void deposit(BigInteger amt, String acctNum);
-	public void transfer();
+	public void deposit(BigDecimal amt, String acctNum);
+	public void transfer(String source, String destination, BigDecimal amt);
 	public List<TransactionsModel> viewTransactions(String acctNum);
+	public boolean userExists(String acctNum);
+	
 }

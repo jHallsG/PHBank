@@ -35,7 +35,6 @@ public class UserDetailsImpl implements UserDetailsService, UserDetailsManager{
 	public void createUser(UserDetails user) {
 		
 		if (userExists(user.getUsername())) {
-			System.out.println("Duplicate Data Error");
 			throw new DataIntegrityViolationException("Error.duplicate.account");
 		}
 		

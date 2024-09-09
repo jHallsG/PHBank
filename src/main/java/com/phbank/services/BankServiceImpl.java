@@ -1,8 +1,10 @@
 package com.phbank.services;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
 
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.phbank.dao.impl.ServicesDAOImpl;
@@ -17,7 +19,7 @@ public class BankServiceImpl {
 		this.services = services;
 	}
 	
-	public BigInteger getBalance(String acctNum) {
+	public BigDecimal getBalance(String acctNum) {
 		return services.viewBalance(acctNum);
 	}
 	
@@ -29,7 +31,14 @@ public class BankServiceImpl {
 		return services.viewTransactions(acctNum);
 	}
 	
-	public void deposit(BigInteger amt, String acctNum) {
+	public void deposit(BigDecimal amt, String acctNum) {
 		services.deposit(amt, acctNum);
+	}
+	
+	public void transfer(BigDecimal amt, String src, String destination){
+		if (src.equals(destination)) throw new RuntimeException("Self-transfer not allowed");
+		if (!services.userExists(destination)) throw new UsernameNotFoundException("Account Number not found");
+		
+		services.transfer(src, destination, amt);
 	}
 }

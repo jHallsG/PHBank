@@ -1,5 +1,6 @@
 package com.phbank.dto;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -7,7 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 public class DepositDTO {
 	
 	private String acctNum;
-	private BigInteger  amount;
+	private BigDecimal  amount;
 	
 	public DepositDTO() {
         this.acctNum = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -16,13 +17,13 @@ public class DepositDTO {
 	public String getAcctNum() {
 		return acctNum;
 	}
-	public BigInteger getAmount() {
+	public BigDecimal getAmount() {
 		return amount;
 	}
 	public void setAcctNum(String acctNum) {
 		this.acctNum = acctNum;
 	}
-	public void setAmount(BigInteger amount) {
+	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
 	}
 

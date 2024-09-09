@@ -12,6 +12,7 @@
 <title>Login</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/phBank-artstyle.css">
+<link rel = "icon" type ="image/png" href = "${pageContext.request.contextPath}/images/PHBank_favicon.png">
 </head>
 
 <body>
@@ -41,6 +42,9 @@
 			<label> No account? Sign Up <a href="../signup/">here</a></label>
 		</form:form>
 	</div>
+	
+	<input type="hidden" id="registrationSuccess" value="${registrationMessage}" />
+	<script src="${pageContext.request.contextPath}/javascript/messages.js"></script>
 </body>
 
 </html>
